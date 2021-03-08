@@ -1,4 +1,4 @@
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.addTraceIndex = exports.logFormatter = exports.txReceiptFormatter = exports.txFormatter = exports.syncFormatter = exports.blockFormatter = exports.format = exports.formatKey = void 0;var _utils = require("./utils");
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.addTraceIndex = exports.logFormatter = exports.txReceiptFormatter = exports.txFormatter = exports.syncFormatter = exports.uncleFormatter = exports.blockFormatter = exports.format = exports.formatKey = void 0;var _utils = require("./utils");
 
 const formatKey = (obj, key, formatter) => {
   if (!obj) return obj;
@@ -38,6 +38,14 @@ const blockFormatter = block => {
   block.transactions = block.transactions.map(tx => txFormatter(tx));
   return block;
 };exports.blockFormatter = blockFormatter;
+
+const uncleFormatter = block => {
+  if (block) {
+    return blockFormatter(block);
+  }
+
+  return block;
+};exports.uncleFormatter = uncleFormatter;
 
 const syncFormatter = sync => {
   if (typeof sync === 'object') {

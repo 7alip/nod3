@@ -5,6 +5,7 @@
 
 
 
+
 var _utils = require("../lib/utils");var _default =
 
 {
@@ -17,6 +18,14 @@ var _utils = require("../lib/utils");var _default =
 
     let params = [hashOrNumber, txs];
     return { method, params, formatters: [_formatters.blockFormatter] };
+  },
+
+  getUncle(number, index) {
+    const method = 'eth_getUncleByBlockNumberAndIndex';
+    const hexNumber = (0, _utils.toHexStr)(number);
+    const hexIndex = (0, _utils.toHexStr)(index);
+    const params = [hexNumber, hexIndex];
+    return { method, params, formatters: [_formatters.uncleFormatter] };
   },
 
   getTransactionByIndex(hashOrNumber, index) {
