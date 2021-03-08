@@ -2,7 +2,8 @@ import {
   blockFormatter,
   syncFormatter,
   txFormatter,
-  txReceiptFormatter
+  txReceiptFormatter,
+  uncleFormatter
 } from '../lib/formatters'
 
 import { isHashOrNumber, toHexStr, toDecimal } from '../lib/utils'
@@ -17,6 +18,14 @@ export default {
 
     let params = [hashOrNumber, txs]
     return { method, params, formatters: [blockFormatter] }
+  },
+
+  getUncle (number, index) {
+    const method = 'eth_getUncleByBlockNumberAndIndex'
+    const hexNumber = toHexStr(number)
+    const hexIndex = toHexStr(index)
+    const params = [hexNumber, hexIndex]
+    return { method, params, formatters: [uncleFormatter] }
   },
 
   getTransactionByIndex (hashOrNumber, index) {
